@@ -118,7 +118,6 @@
 
 .um-input {
   flex: 1;
-  padding: 8px 14px;
   border: none;
   border-bottom: 1px solid #999;
   font-size: 14px;
@@ -177,4 +176,28 @@
 
 .um-upload-btn:hover {
   background: #2ea88a;
+}
+@media (max-width: 768px) {
+
+  .um-title-container {
+    display: flex;
+    flex-direction: column;  
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+
+  .um-search {
+    order: 1;
+    width: 100%;
+  }
+
+  .um-title {
+    order: 2;
+  }
+
+  .um-search input {
+    width: 100%;
+  }
+
 }

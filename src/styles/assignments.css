@@ -146,7 +146,6 @@
 .assignment-detail {
   display: flex;
   flex-direction: column;
-  align-items: center;
   flex: 1;
 }
 
@@ -180,4 +179,80 @@
 
 .assignment-view-btn:hover {
   background: #3d9aa8;
+}
+
+@media (max-width: 768px) {
+
+  .assignment-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "id turned"
+      "issued due"
+      "title title"
+      "button button";
+
+    gap: 6px;
+    padding: 0px;
+    background: #f3f4f6;
+    border-radius: 16px;
+  }
+  .assignment-info {
+    grid-area: id;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .assignment-id {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .assignment-name {
+    grid-area: title;
+    font-size: 13px;
+    color: #555;
+  }
+  .assignment-detail:nth-of-type(1) {
+    grid-area: issued;
+    display: flex;
+    justify-content: flex-start;
+    gap: 4px;
+  }
+  .assignment-detail:nth-of-type(2) {
+    grid-area: due;
+    display: flex;
+    justify-content: flex-end;
+    gap: 4px;
+  }
+
+  
+  .assignment-detail:nth-of-type(3) {
+    grid-area: turned;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .assignment-value.bold {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  
+  .assignment-view-btn {
+  grid-area: button;
+
+  width: fit-content;
+  margin-top: 6px;
+
+  justify-self: end;   
+
+  padding: 8px 20px;
+  border-radius: 22px;
+}
+.assignments-search{
+  display: none;
+}
+.sv-search{
+  display: none;
+}
 }

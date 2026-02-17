@@ -161,3 +161,12 @@
   font-weight: 700;
   color: #fff;
 }
+@media (max-width: 768px) {
+  .live-sessions-search {
+    display: none;
+  }
+  .live-sessions-grid{
+    display: grid;
+  grid-template-columns:auto
+  }
+}

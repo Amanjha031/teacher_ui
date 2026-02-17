@@ -62,3 +62,22 @@
 .submenu p:hover {
   opacity: 1;
 }
+
+@media (max-width: 768px) {
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    width: 260px;
+    height: 100vh;
+    background: #4f6f8f;
+    transition: 0.3s ease;
+    z-index: 1000;
+  }
+
+  /* When hamburger clicked */
+  body.sidebar-open .sidebar {
+    left: 0;
+  }
+}

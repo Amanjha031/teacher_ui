@@ -4,8 +4,16 @@ import Header from "../components/Header";
 import "./layout.css";
 
 export default function TeacherLayout() {
+
+  const closeSidebar = () => {
+    document.body.classList.remove("sidebar-open");
+  };
+
   return (
-    <div className="teacher-layout">
+    <div
+      className="teacher-layout"
+      onClick={closeSidebar}  
+    >
       <Sidebar />
 
       <div className="teacher-main">

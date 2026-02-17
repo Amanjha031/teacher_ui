@@ -372,3 +372,77 @@
   color: #555;
   margin: 1px 0;
 }
+
+@media (max-width: 768px) {
+
+  /* Top row → stack */
+  .dash-top {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* Live session cards scroll horizontally */
+  .dash-live-row {
+    display: flex;
+    overflow-x: auto;
+    gap: 12px;
+  }
+
+  .dash-live-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Bottom → 1 column */
+  .dash-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* Remove fixed widths if any */
+  .dash-left-col,
+  .dash-notif-card,
+  .dash-activity-card {
+    width: 100%;
+  }
+}
+.mobile-view {
+  display: none;
+}
+
+@media (max-width: 768px) {
+
+  .desktop-view {
+    display: none;
+  }
+
+  .mobile-view {
+    display: block;
+    padding: 0 12px;
+  }
+  .calendar{
+    width: 100%;
+  }
+}
+@media (max-width: 768px) {
+
+  .dash-live-row {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+    .dash-live-row > * {
+    width: 100%;              
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .dash-top {
+    display: block;     
+    width: 100%;
+  }
+
+}

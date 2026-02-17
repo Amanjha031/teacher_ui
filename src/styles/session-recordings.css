@@ -147,3 +147,37 @@
   font-size: 14px;
   font-weight: 700;
 }
+@media (max-width: 768px) {
+
+  .sr-header {
+    display: flex;
+    flex-direction: column;   
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .sr-header .search-box {
+    order: 1;
+    width: 100%;
+  }
+
+  
+  .sr-header h2 {
+    order: 2;
+  }
+
+  
+  .sr-header .search-box input {
+    width: 100%;
+  }
+
+}
+@media (max-width: 768px) {
+
+  .sr-grid {
+    display: grid;
+    grid-template-columns: auto;
+
+  }
+
+}

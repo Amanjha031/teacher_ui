@@ -126,6 +126,9 @@
   color: #333;
   outline: none;
   text-align: center;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .ur-input:focus {
@@ -169,4 +172,26 @@
 
 .ur-upload-btn:hover {
   background: #2ea88a;
+}
+@media (max-width: 768px) {
+
+  .ur-title-container {
+    flex-direction: column;    
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .ur-search {
+    order: 1;
+    width: 100%;
+  }
+
+  .ur-title {
+    order: 2;
+  }
+
+  .ur-search input {
+    width: 100%;
+  }
+
 }

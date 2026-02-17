@@ -221,3 +221,28 @@
 .ca-btn-error {
   outline: 2px solid #e74c3c;
 }
+@media (max-width: 768px) {
+
+  .ca-title-container {
+    display: flex;
+    flex-direction: column;   
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+
+  .ca-search {
+    order: 1;
+    width: 100%;
+  }
+
+  .ca-title {
+    order: 2;
+  }
+
+
+  .ca-search input {
+    width: 100%;
+  }
+
+}

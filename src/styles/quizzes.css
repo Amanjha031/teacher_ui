@@ -182,3 +182,29 @@
   font-size: 14px;
   padding: 40px 0;
 }
+
+@media (max-width: 768px) {
+
+  .quizzes-title-container {
+    display: flex;
+    flex-direction: column;   
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+
+  .quizzes-title-container .search-box {
+    order: 1;
+    width: 100%;
+  }
+
+
+  .quizzes-title-container h2 {
+    order: 2;
+  }
+
+  .quizzes-title-container .search-box input {
+    width: 100%;
+  }
+
+}
