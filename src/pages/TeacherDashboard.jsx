@@ -10,35 +10,130 @@ import NotificationItem from "../components/NotificationItem";
 import ActivityItem from "../components/ActivityItem";
 
 export default function TeacherDashboard() {
-
   const [activeSection, setActiveSection] = useState("Upcoming Live Sessions");
+
+  // Notification filter
+  const [notifFilter, setNotifFilter] = useState("All");
+
+  // Activity filter
+  const [activityFilter, setActivityFilter] = useState("All");
+
+  // Notification data (with types)
+  const notificationData = [
+    {
+      id: 1,
+      type: "Assignment",
+      title: "New Assignment Updated",
+      barColor: "green",
+      lines: [
+        "Subject Name: Topic/Title",
+        "Teacher: Teacher's Name",
+        "Due Date: 20 Feb 26 (Friday)",
+      ],
+    },
+    {
+      id: 2,
+      type: "Live",
+      title: "New Live Session Updated",
+      barColor: "teal",
+      lines: [
+        "Subject Name",
+        "Teacher: Teacher's Name",
+        "20 Feb 26 (Friday)",
+        "10:00 AM - 11:30 AM",
+      ],
+    },
+    {
+      id: 3,
+      type: "Assignment",
+      title: "New Assignment Updated",
+      barColor: "red",
+      lines: [
+        "Subject Name: Topic/Title",
+        "Teacher: Teacher's Name",
+        "Due Date: 20 Feb 26 (Friday)",
+      ],
+    },
+    {
+      id: 4,
+      type: "Quiz",
+      title: "New Quiz Updated",
+      barColor: "purple",
+      lines: [
+        "Subject Name: Topic/Title",
+        "Teacher: Teacher's Name",
+        "Due Date: 20 Feb 26 (Friday)",
+      ],
+    },
+  ];
+
+  const filteredNotifications =
+    notifFilter === "All"
+      ? notificationData
+      : notificationData.filter((n) => n.type === notifFilter);
+
+  // Activity data (with types)
+  const activityData = [
+    {
+      id: 1,
+      type: "Live",
+      date: "21/01/2026 (Wed)",
+      label: "Live Session",
+      labelColor: "teal",
+      lines: [
+        "Mathematics chapter 1: algebra",
+        "Teacher: Sir Zothana",
+        "Time: 1:00pm to 2:00pm",
+      ],
+    },
+    {
+      id: 2,
+      type: "Assignment",
+      date: "21/01/2026 (Wed)",
+      label: "Due Assignment",
+      labelColor: "yellow",
+      lines: ["Mathematics chapter 1: algebra", "Teacher: Sir Zothana"],
+    },
+    {
+      id: 3,
+      type: "Quiz",
+      date: "21/01/2026 (Wed)",
+      label: "Quiz",
+      labelColor: "purple",
+      lines: [
+        "Science: chapter 1: Chemistry",
+        "Teacher: Sir Rasta",
+        "Due Date: 23/01/26 (Friday)",
+      ],
+    },
+  ];
+
+  const filteredActivities =
+    activityFilter === "All"
+      ? activityData
+      : activityData.filter((a) => a.type === activityFilter);
 
   return (
     <div className="dashboard">
-
       <SubHeaderNav
         sections={[
-  "Upcoming Live Sessions",
-  "Calendar",
-  "Assignment",
-  "Quiz",
-  "Notification",
-  "Activity"
-]}
-
+          "Upcoming Live Sessions",
+          "Calendar",
+          "Assignment",
+          "Quiz",
+          "Notification",
+          "Activity",
+        ]}
         activeSection={activeSection}
         setActiveSection={setActiveSection}
       />
 
       {/* Desktop View */}
       <div className="desktop-view">
-
-        {/*  top row */}
+        {/* top row */}
         <div className="dash-top">
           <div className="dash-live-section">
-            <h3 className="dash-section-title">
-              Upcoming Live Sessions
-            </h3>
+            <h3 className="dash-section-title">Upcoming Live Sessions</h3>
 
             <div className="dash-live-row">
               <LiveSessionCard
@@ -65,11 +160,9 @@ export default function TeacherDashboard() {
           <CalendarWidget />
         </div>
 
-        {/* bottom row*/}
+        {/* bottom row */}
         <div className="dash-bottom">
-
           <div className="dash-left-col">
-
             {/* Assignment */}
             <div className="dash-card">
               <div className="dash-card-header">
@@ -97,56 +190,33 @@ export default function TeacherDashboard() {
                 <QuizItem type="success" />
               </div>
             </div>
-
           </div>
 
           {/* Notification */}
           <div className="dash-card dash-notif-card">
             <div className="dash-card-header">
               <h4>Notification</h4>
-              <select className="dash-filter">
-                <option>All</option>
+
+              <select
+                className="dash-filter"
+                value={notifFilter}
+                onChange={(e) => setNotifFilter(e.target.value)}
+              >
+                <option value="All">All</option>
+                <option value="Assignment">Assignment</option>
+                <option value="Quiz">Quiz</option>
               </select>
             </div>
 
             <div className="dash-card-body">
-              <NotificationItem
-                title="New Assignment Updated"
-                barColor="green"
-                lines={[
-                  "Subject Name: Topic/Title",
-                  "Teacher: Teacher's Name",
-                  "Due Date: 20 Feb 26 (Friday)"
-                ]}
-              />
-              <NotificationItem
-                title="New Live Session Updated"
-                barColor="teal"
-                lines={[
-                  "Subject Name",
-                  "Teacher: Teacher's Name",
-                  "20 Feb 26 (Friday)",
-                  "10:00 AM - 11:30 AM"
-                ]}
-              />
-              <NotificationItem
-                title="New Assignment Updated"
-                barColor="red"
-                lines={[
-                  "Subject Name: Topic/Title",
-                  "Teacher: Teacher's Name",
-                  "Due Date: 20 Feb 26 (Friday)"
-                ]}
-              />
-              <NotificationItem
-                title="New Quiz Updated"
-                barColor="purple"
-                lines={[
-                  "Subject Name: Topic/Title",
-                  "Teacher: Teacher's Name",
-                  "Due Date: 20 Feb 26 (Friday)"
-                ]}
-              />
+              {filteredNotifications.map((n) => (
+                <NotificationItem
+                  key={n.id}
+                  title={n.title}
+                  barColor={n.barColor}
+                  lines={n.lines}
+                />
+              ))}
             </div>
           </div>
 
@@ -154,87 +224,69 @@ export default function TeacherDashboard() {
           <div className="dash-card dash-activity-card">
             <div className="dash-card-header">
               <h4>8 Jan 2026</h4>
-              <select className="dash-filter">
-                <option>All</option>
+
+              <select
+                className="dash-filter"
+                value={activityFilter}
+                onChange={(e) => setActivityFilter(e.target.value)}
+              >
+                <option value="All">All</option>
+                <option value="Assignment">Assignment</option>
+                <option value="Quiz">Quiz</option>
               </select>
             </div>
 
             <div className="dash-card-body">
-              <ActivityItem
-                date="21/01/2026 (Wed)"
-                label="Live Session"
-                labelColor="teal"
-                lines={[
-                  "Mathematics chapter 1: algebra",
-                  "Teacher: Sir Zothana",
-                  "Time: 1:00pm to 2:00pm"
-                ]}
-              />
-              <ActivityItem
-                date="21/01/2026 (Wed)"
-                label="Due Assignment"
-                labelColor="yellow"
-                lines={[
-                  "Mathematics chapter 1: algebra",
-                  "Teacher: Sir Zothana"
-                ]}
-              />
-              <ActivityItem
-                date="21/01/2026 (Wed)"
-                label="Quiz"
-                labelColor="purple"
-                lines={[
-                  "Science: chapter 1: Chemistry",
-                  "Teacher: Sir Rasta",
-                  "Due Date: 23/01/26 (Friday)"
-                ]}
-              />
+              {filteredActivities.map((a) => (
+                <ActivityItem
+                  key={a.id}
+                  date={a.date}
+                  label={a.label}
+                  labelColor={a.labelColor}
+                  lines={a.lines}
+                />
+              ))}
             </div>
           </div>
-
         </div>
       </div>
 
-      {/* mobile view */}
+      {/* Mobile view */}
       <div className="mobile-view">
+        {activeSection === "Upcoming Live Sessions" && (
+          <div className="dash-top">
+            <div className="dash-live-section">
+              <h3 className="dash-section-title">Upcoming Live Sessions</h3>
 
-       {activeSection === "Upcoming Live Sessions" && (
-  <div className="dash-top">
-    <div className="dash-live-section">
-      <h3 className="dash-section-title">
-        Upcoming Live Sessions
-      </h3>
+              <div className="dash-live-row">
+                <LiveSessionCard
+                  subject="Subject Name"
+                  topic="This Topic"
+                  startsIn="Time:"
+                  timing="Session Timing"
+                />
+                <LiveSessionCard
+                  subject="Biology 101"
+                  topic="Introduction to Genetics"
+                  startsIn="15min/1day"
+                  timing="10:00 AM - 11:30 AM"
+                />
+                <LiveSessionCard
+                  subject="Art History"
+                  topic="Introduction to Modernism"
+                  startsIn="30 min"
+                  timing="1:00 PM - 2:30 PM"
+                />
+              </div>
+            </div>
+          </div>
+        )}
 
-      <div className="dash-live-row">
-        <LiveSessionCard
-          subject="Subject Name"
-          topic="This Topic"
-          startsIn="Time:"
-          timing="Session Timing"
-        />
-        <LiveSessionCard
-          subject="Biology 101"
-          topic="Introduction to Genetics"
-          startsIn="15min/1day"
-          timing="10:00 AM - 11:30 AM"
-        />
-        <LiveSessionCard
-          subject="Art History"
-          topic="Introduction to Modernism"
-          startsIn="30 min"
-          timing="1:00 PM - 2:30 PM"
-        />
-      </div>
-    </div>
-  </div>
-)}
-
-{activeSection === "Calendar" && (
-  <div className="dash-card">
-    <CalendarWidget />
-  </div>
-)}
-
+        {activeSection === "Calendar" && (
+          <div className="dash-card">
+            <CalendarWidget />
+          </div>
+        )}
 
         {activeSection === "Assignment" && (
           <div className="dash-left-col">
@@ -272,17 +324,27 @@ export default function TeacherDashboard() {
           <div className="dash-card dash-notif-card">
             <div className="dash-card-header">
               <h4>Notification</h4>
+
+              <select
+                className="dash-filter"
+                value={notifFilter}
+                onChange={(e) => setNotifFilter(e.target.value)}
+              >
+                <option value="All">All</option>
+                <option value="Assignment">Assignment</option>
+                <option value="Quiz">Quiz</option>
+              </select>
             </div>
+
             <div className="dash-card-body">
-              <NotificationItem
-                title="New Assignment Updated"
-                barColor="green"
-                lines={[
-                  "Subject Name: Topic/Title",
-                  "Teacher: Teacher's Name",
-                  "Due Date: 20 Feb 26 (Friday)"
-                ]}
-              />
+              {filteredNotifications.map((n) => (
+                <NotificationItem
+                  key={n.id}
+                  title={n.title}
+                  barColor={n.barColor}
+                  lines={n.lines}
+                />
+              ))}
             </div>
           </div>
         )}
@@ -291,24 +353,32 @@ export default function TeacherDashboard() {
           <div className="dash-card dash-activity-card">
             <div className="dash-card-header">
               <h4>8 Jan 2026</h4>
+
+              <select
+                className="dash-filter"
+                value={activityFilter}
+                onChange={(e) => setActivityFilter(e.target.value)}
+              >
+                <option value="All">All</option>
+                <option value="Assignment">Assignment</option>
+                <option value="Quiz">Quiz</option>
+              </select>
             </div>
+
             <div className="dash-card-body">
-              <ActivityItem
-                date="21/01/2026 (Wed)"
-                label="Live Session"
-                labelColor="teal"
-                lines={[
-                  "Mathematics chapter 1: algebra",
-                  "Teacher: Sir Zothana",
-                  "Time: 1:00pm to 2:00pm"
-                ]}
-              />
+              {filteredActivities.map((a) => (
+                <ActivityItem
+                  key={a.id}
+                  date={a.date}
+                  label={a.label}
+                  labelColor={a.labelColor}
+                  lines={a.lines}
+                />
+              ))}
             </div>
           </div>
         )}
-
       </div>
-
     </div>
   );
 }
